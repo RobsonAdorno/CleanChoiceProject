@@ -10,6 +10,8 @@ namespace ClearChoice.DAL
     {
         private static Context ctx = SingletonContext.GetContext();
 
+        //------------------------------------------------------------- Daqui p baixo é apenas transações com pessoas fisicas ------------------------
+
         public static Pessoa BuscarPessoaLogin(PessoaFisica pf)
         {
             return ctx.Pessoas.FirstOrDefault(x => x.Login.Equals(pf.RG));
@@ -23,6 +25,25 @@ namespace ClearChoice.DAL
             }
 
             ctx.Pessoas.Add(pf);
+            ctx.SaveChanges();
+            return true;
+        }
+
+        //----------------------------------------------- Daqui p baixo é apenas pessoas juridicas ------------------------------------------------
+
+        public static Pessoa VerificarPorCNPJ(PessoaJuridica pj)
+        {
+            return ctx.Pessoas.FirstOrDefault(x => x.Login.Equals(pj.Login));
+        }
+
+        public static bool CadastrarPJ(PessoaJuridica pj)
+        {
+            if (VerificarPorCNPJ(pj) != null)
+            {
+                return false;
+            }
+
+            ctx.Pessoas.Add(pj);
             ctx.SaveChanges();
             return true;
         }

@@ -31,6 +31,7 @@ namespace ClearChoice.Controllers
             if (CadastrarDAO.CadastrarPF(pf))
             {
                 ViewBag.Message = "Cadastro Efetuado!";
+                RedirectToAction("Index", "Home");
             }else
             {
                 ViewBag.Message = "Erro ao cadastrar!";
@@ -38,6 +39,28 @@ namespace ClearChoice.Controllers
 
             return View();
 
+        }
+        [HttpGet]
+
+        public ActionResult CadastrarPJView(string txtNome, string txtEmail, string txtLogin, string txtCNPJ, string txtSenha)
+        {
+            PessoaJuridica pj = new PessoaJuridica()
+            {
+                CNPJ = txtCNPJ,
+                Nome = txtNome,
+                Email = txtEmail,
+                Login = txtLogin,
+                Senha = txtSenha
+            };
+
+            if (CadastrarDAO.CadastrarPJ(pj))
+            {
+                ViewBag.Message = "Empresa cadastrada com sucesso!";
+                return RedirectToAction("Index", "Home");
+            }
+
+            ViewBag.Message = "Empresa já cadastrada!";
+            return View();
         }
     }
 }
