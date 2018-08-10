@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CadastroPFView</title>
+</head>
+<body>
+    <div> 
+        @using (Html.BeginForm())
+        {
+            @ViewBag.Message
+
+                @Html.Label("Nome")
+                @Html.TextBox("txtNome")<br/><br />
+
+                @Html.Label("Email")
+                @Html.TextBox("txtEmail")<br/><br />
+
+                @Html.Label("Login")
+                @Html.TextBox("txtLogin")<br/><br />
+
+                @Html.Label("RG")
+                @Html.TextBox("txtRG")<br/><br />
+
+                @Html.Label("Senha")
+                @Html.Password("txtSenha")<br/><br />
+
+                <input type="submit" value="Cadastrar" />
+
+
+                    }
+
+</div>
+</body>
+</html>
